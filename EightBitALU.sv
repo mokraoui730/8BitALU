@@ -6,8 +6,7 @@ input	enable_n,
 input reset_n,
 output [7:0] result, 
 output overflow_flag, 
-output zero_flag
-)
+);
 
 typedef enum logic [2:0] {
         IDLE, AND, OR, XOR, APASS, BPASS, ADD, SUB
@@ -24,7 +23,6 @@ always_ff @(posedge reset) begin
 always @(op) begin
 	// flags always set to zero before operation
 	overflow_flag = 1'b0;
-	zero_flag = 1'b0;
 	
 	// default state - idle or listening
 	next_state = IDLE; 
