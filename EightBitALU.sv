@@ -15,7 +15,7 @@ state_t state, next_state;
 
 always_ff @(posedge reset) begin
 	if (reset)
-		state <= S0;
+		state <= IDLE;
 	else 
 		state <= next_state;
 	end
