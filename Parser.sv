@@ -6,5 +6,6 @@ module Parser #(parameter N = 6)(
 
     assign ones = digit % 10;
     assign tens = digit / 10;
+    assign hundreth = digit / 100; 
 
 endmodule
