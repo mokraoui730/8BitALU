@@ -31,19 +31,19 @@ always @(op) begin
 	case (op)
 	
 		IDLE: begin
-			if(op == 1)
+			if(opcode == 1)
 				next_state = AND; 
-			if (op == 2)
+			if (opcode == 2)
 				next_state = OR
-			if(op == 3) 
+			if(opcode == 3) 
 					next_state = XOR;
-			if(op == 4) 
+			if(opcode == 4) 
 					next_state = APASS;
-			if(op == 5) 
+			if(opcode == 5) 
 					next_state = BPASS;
-			if(op == 6) 
+			if(opcode == 6) 
 					next_state = ADD;
-			if(op == 6) 
+			if(opcode == 6) 
 					next_state = SUB;
 		end  
 		AND : next_state = IDLE; 
