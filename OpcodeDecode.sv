@@ -1,8 +1,8 @@
 // 8BitALU
 module OpcodeDecode(
   input logic [2:0] opcode, 
-  input logic enable_n, // active low (activates when switch is 0)
-  input logic reset_n, // active low (activates when button is pressed)
+  input logic enable_n, // active low (enabled when switch is 0)
+  input logic reset_n, // active low (resets when button is pressed when == 1)
   input logic [2:0] current_state, // State FSM is curretnly in (Sn)
   output logic [2:0] next_state, // State FSM where to go on next clock edge (Sx)
   output logic sel_and,   // ---------------------------------------------------- //
@@ -25,7 +25,7 @@ module OpcodeDecode(
   localparam S_SUB = 3'b111;
   
   // Next State Logic //
-  // S0 + enable_n = 0 + opcode -> yransition to opcode state
+  // S0 + enable_n = 0 + opcode -> transition to opcode state
   // S0 + enable_n = 1 -> stay IDLE (S0)
   // S1 - S7 + any -> return to IDLE (S0)
   alway_comb begin
