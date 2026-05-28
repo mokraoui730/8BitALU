@@ -9,6 +9,17 @@ output overflow_flag,
 output zero_flag
 )
 
+typedef enum logic {
+	S0, S1, S2, S3, S4
+} state_t;
+state_t state, next_state;
+
+always_ff @(posedge reset) begin
+	if (reset)
+		state <= S0;
+	else 
+		state <= next_state;
+	end
 // Just A //
 
 // Just B //
