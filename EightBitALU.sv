@@ -9,9 +9,9 @@ output overflow_flag,
 output zero_flag
 )
 
-typedef enum logic {
-	S0, S1, S2, S3, S4
-} state_t;
+typedef enum logic [2:0] {
+        IDLE, AND, OR, XOR, APASS, BPASS, ADD, SUB
+    } state_t;
 state_t state, next_state;
 
 always_ff @(posedge reset) begin
@@ -20,6 +20,42 @@ always_ff @(posedge reset) begin
 	else 
 		state <= next_state;
 	end
+	
+always @(op) begin
+	// flags always set to zero before operation
+	overflow_flag = 1'b0;
+	zero_flag = 1'b0;
+	
+	// default state - idle or listening
+	next_state = IDLE; 
+	case (op)
+	
+		IDLE: begin
+			if(op == 1)
+				next_state = AND; 
+			if (op == 2)
+				next_state = OR
+			if(op == 3) 
+					next_state = XOR;
+			if(op == 4) 
+					next_state = APASS;
+			if(op == 5) 
+					next_state = BPASS;
+			if(op == 6) 
+					next_state = ADD;
+			if(op == 6) 
+					next_state = SUB;
+		end  
+		AND : next_state = IDLE; 
+		OR: next_state = IDLE; 
+		XOR: next_state = IDLE; 
+		APASS: next_state = IDLE; 
+		BPASS: next_state = IDLE; 
+		ADD: next_state = IDLE;
+		SUB: next_state = IDLE;
+		default: next_state = IDLE; 
+		
+	endcase
 // Just A //
 
 // Just B //
