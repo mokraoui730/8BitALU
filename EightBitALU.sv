@@ -31,17 +31,17 @@ always @(op) begin
 		IDLE: begin
 			if(opcode == 1)
 				next_state = AND; 
-			if (opcode == 2)
+			else if (opcode == 2)
 				next_state = OR
-			if(opcode == 3) 
+			else if(opcode == 3) 
 					next_state = XOR;
-			if(opcode == 4) 
+			else if(opcode == 4) 
 					next_state = APASS;
-			if(opcode == 5) 
+			else if(opcode == 5) 
 					next_state = BPASS;
-			if(opcode == 6) 
+			else if(opcode == 6) 
 					next_state = ADD;
-			if(opcode == 6) 
+			else if(opcode == 6) 
 					next_state = SUB;
 		end  
 		AND : next_state = IDLE; 
