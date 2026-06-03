@@ -2,6 +2,8 @@ module EightBitALU(
 	input logic [7:0] A,  // 8 bit input A
 	input logic [7:0] B,  //8 bit input B
 	input logic [2:0] opcode, // 3 bit binary designating current operation
+	input logic reset_n,
+	input logic enable_n,
 	output logic [7:0] result, // 8 bit binary number result from operation
 	output logic overflow // flag signaling overflow on addition or subtraction, high when overflow occurs
 );
@@ -35,24 +37,23 @@ OpcodeDecode decode (
 );
 	
 // adds A and B if op is sel_and, else subtracts
-Addition_Subtraction ADD(
+arithmetic arith_op(
 	.A(A),
 	.B(B),
-	.sel_and(sel_and),
+	.sel_and(sel_add),
 	.result(arith_res),
 	.overflow(zero_flag)
-
 );
 
 // bitwise AND operation of A and B
-AND_op and(
+AND and_op(
 	.A(A),
 	.B(B),
 	.result(and_res)
 );
 
 // bitwise OR operation of A and B
-OR_op or(
+OR or_op(
 	.A(A),
 	.B(B),
 	.result(or_res)
@@ -60,17 +61,17 @@ OR_op or(
 
 
 // bitwise XOR operation of A and B
-XOR_op xor(
+XOR xor_op(
 	.A(A),
 	.B(B),
 	.result(xor_res)
 );
 
 // resets result and flag to zero asynchronously when reset is pressed 
-always_ff @(negedge reset_n) begin
+always_ff @(posedge reset_n) begin
 	if (!reset_n) begin
-		result = 8'b0; 
-		overflow = 1'b0; 
+		result <= 8'b0; 
+		overflow <= 1'b0; 
 	end
 end
 
@@ -79,8 +80,8 @@ end
 always_comb begin
 	// flags always set to zero before operation
 	// only set to high with addition or subtraction ops
-	overflow_flag = 1'b0; 
-
+	overflow = 1'b0; 
+	result = 8'b0; 
 	// only perform ops when enabled 
 	if (enable_n) begin
 		if (sel_and) 
