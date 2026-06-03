@@ -1,4 +1,4 @@
-module ClockDisplay(
+module ALUDisplay(
     input  logic        clk,
     input  logic        reset_n,
     output logic [6:0]  Seg0,    // seconds ones  (rightmost)
