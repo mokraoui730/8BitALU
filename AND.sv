@@ -2,7 +2,7 @@ module AND_op(
   input logic [7:0] A, 
   input logic [7:0] B,
   input logic opcode, 
-  output result
+  output logic [7:0] result
 )
 // AND function //
   always_comb begin
