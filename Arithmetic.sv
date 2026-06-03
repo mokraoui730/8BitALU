@@ -1,7 +1,7 @@
 module arithmetic( 
   input logic [7:0] A, 
   input logic [7:0] B,
-  input logic opcode, 
+  input logic sel_and, 
   output logic overflow, 
   output logic [7:0] result
 );
