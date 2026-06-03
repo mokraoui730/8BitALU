@@ -1,4 +1,4 @@
-module AND_op( 
+module AND( 
   input logic [7:0] A, 
   input logic [7:0] B,
   output logic [7:0] result
