@@ -14,6 +14,11 @@ module EightBitALU(
 	logic sel_add; 
 	logic sel_sub; 
 	
+	logic arith_res;
+	logic and_res;
+	logic or_res;
+	logic xor_res;
+	
 OpcodeDecode decode (
 	.opcode(opcode),
 	.enable_n(enable_n),
@@ -29,28 +34,28 @@ OpcodeDecode decode (
 Addition_Subtraction ADD(
 	.A(A),
 	.B(B),
-	// check if need flag to disinct
-	.result(result),
-	.zero_flag(zero_flag)
+	.sel_and(sel_and),
+	.result(arith_res),
+	.overflow(zero_flag)
 
 );
 
 AND_op and(
 	.A(A),
 	.B(B),
-	.result(result)
+	.result(and_res)
 );
 
 OR_op or(
 	.A(A),
 	.B(B),
-	.result(result)
+	.result(or_res)
 );
 
 XOR_op or(
 	.A(A),
 	.B(B),
-	.result(result)
+	.result(xor_res)
 );
 
 // if we don't need to do a fsm design 
@@ -60,22 +65,21 @@ always_comb begin
 	zero_flag = 1'b0;
 	
 	if (enable_n) begin
-		if (sel_and) begin 
-			
-		end else
-		if (sel_or) begin
-			
-		end else if(sel_xor) begin
-		
-		end else if(sel_apass) result = A; 
-		
-		else if (sel_bpass) result = B; 
-		
-		else if(sel_add) begin 
-		
-		end else if(sel_sub) begin
-			
-		end else begin
+		if (sel_and) 
+			result = and_res; 
+		else if (sel_or) 
+			result = or_res; 
+		else if(sel_xor) 
+			result = xor_res;
+		else if(sel_apass) 
+			result = A; 
+		else if (sel_bpass) 
+			result = B; 
+		else if(sel_add) 
+			result = arith_res;  
+		else if(sel_sub) 
+			result = arith_res;
+		else
 			result = 8'b0;
 	end
 
