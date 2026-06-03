@@ -1,12 +1,11 @@
 module ALUDisplay(
     input  logic        clk,
     input  logic        reset_n,
-    output logic [6:0]  Seg0,    // seconds ones  (rightmost)
-    output logic [6:0]  Seg1,    // seconds tens
-    output logic [6:0]  Seg2,    // minutes ones
+    output logic [6:0]  Seg0,    //  ones  (rightmost)
+    output logic [6:0]  Seg1,    //  tens
+    output logic [6:0]  Seg2,    //  hundreds
 );
 
-    logic [25:0] tickCount;
     logic [5:0]  seconds, minutes;
     logic [6:0]  hours;
 
