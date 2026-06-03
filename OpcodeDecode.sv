@@ -7,7 +7,7 @@ module OpcodeDecode(
   output logic sel_or,    // ---------------------------------------------------- //
   output logic sel_xor,   // ---------------- one gets selected ----------------- //
   output logic sel_apass, // --------------- (selected becomes 1) --------------- //
-  output logic sel_bpass  // ----------------- (the rest are 0) ----------------- //
+  output logic sel_bpass,  // ----------------- (the rest are 0) ----------------- //
   output logic sel_add,   // ---------------------------------------------------- //
   output logic sel_sub    // ---------------------------------------------------- //
 );
