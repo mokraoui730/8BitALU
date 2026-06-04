@@ -22,11 +22,15 @@ module Eight_bit_ALU(
 	logic and_res;
 	logic or_res;
 	logic xor_res;
+	
+	logic result_comb;
+	logic result_overflow; 
 
 // sets op var to 1 if chosen by the opcode 	
 OpcodeDecode decode (
 	.opcode(opcode),
 	.enable_n(enable_n),
+	.reset_n(reset_n), 
 	.sel_and(sel_and),
 	.sel_or(sel_or),
 	.sel_xor(sel_xor),
@@ -67,14 +71,6 @@ xor_op xor_operation(
 	.result(xor_res)
 );
 
-// resets result and flag to zero asynchronously when reset is pressed 
-always_ff @(posedge reset_n) begin
-	if (!reset_n) begin
-		result <= 8'b0; 
-		overflow <= 1'b0; 
-	end
-end
-
 
 // produces the result of a operation specified by the opcode  
 always_comb begin
@@ -101,7 +97,13 @@ always_comb begin
 		else
 			result = 8'b0;
 	end
-
+	
+	if (!reset_n) begin
+		result = 8'b0; 
+		overflow = 1'b0; 
+	end
+	
 end
+
 
 endmodule
