@@ -1,9 +1,12 @@
-module or_op( 
+// XOR function //
+module xor_op( 
   input logic [7:0] A, 
   input logic [7:0] B,
   output logic [7:0] result 
 );
   // OR module
   // A | B
-  assign result = A | B;
+
+  assign result = A ^ B;
+  
 endmodule
