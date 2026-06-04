@@ -1,4 +1,4 @@
-module EightBitALU(
+module Eight_bit_ALU(
 	input logic [7:0] A,  // 8 bit input A
 	input logic [7:0] B,  //8 bit input B
 	input logic [2:0] opcode, // 3 bit binary designating current operation
@@ -40,20 +40,20 @@ OpcodeDecode decode (
 arithmetic arith_op(
 	.A(A),
 	.B(B),
-	.sel_and(sel_add),
+	.sel_add(sel_and),
 	.result(arith_res),
 	.overflow(zero_flag)
 );
 
 // bitwise AND operation of A and B
-AND and_op(
+and_op and_operation(
 	.A(A),
 	.B(B),
 	.result(and_res)
 );
 
 // bitwise OR operation of A and B
-OR or_op(
+or_op or_operation(
 	.A(A),
 	.B(B),
 	.result(or_res)
@@ -61,7 +61,7 @@ OR or_op(
 
 
 // bitwise XOR operation of A and B
-XOR xor_op(
+xor_op xor_operation(
 	.A(A),
 	.B(B),
 	.result(xor_res)
@@ -83,7 +83,7 @@ always_comb begin
 	overflow = 1'b0; 
 	result = 8'b0; 
 	// only perform ops when enabled 
-	if (enable_n) begin
+	if (!enable_n) begin
 		if (sel_and) 
 			result = and_res; 
 		else if (sel_or) 
