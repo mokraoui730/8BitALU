@@ -18,13 +18,11 @@ module Eight_bit_ALU(
 	logic sel_sub; 
 	
 	// stores results from each operation
-	logic arith_res;
-	logic and_res;
-	logic or_res;
-	logic xor_res;
-	
-	logic result_comb;
-	logic result_overflow; 
+	logic [7:0] arith_res;
+	logic [7:0] and_res;
+	logic [7:0] or_res;
+	logic [7:0] xor_res;
+	logic overflow_arith; 
 
 // sets op var to 1 if chosen by the opcode 	
 OpcodeDecode decode (
@@ -46,7 +44,7 @@ arithmetic arith_op(
 	.B(B),
 	.sel_add(sel_and),
 	.result(arith_res),
-	.overflow(zero_flag)
+	.overflow(overflow_arith)
 );
 
 // bitwise AND operation of A and B
@@ -71,7 +69,6 @@ xor_op xor_operation(
 	.result(xor_res)
 );
 
-
 // produces the result of a operation specified by the opcode  
 always_comb begin
 	// flags always set to zero before operation
@@ -90,11 +87,13 @@ always_comb begin
 			result = A; 
 		else if (sel_bpass) 
 			result = B; 
-		else if(sel_add) 
-			result = arith_res;  
-		else if(sel_sub) 
+		else if(sel_add) begin
+			result = arith_res; 
+			overflow = overflow_arith; 
+		end else if(sel_sub) begin
 			result = arith_res;
-		else
+			overflow = overflow_arith; 
+		end else
 			result = 8'b0;
 	end
 	
@@ -104,6 +103,5 @@ always_comb begin
 	end
 	
 end
-
 
 endmodule
