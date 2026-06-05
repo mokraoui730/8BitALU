@@ -42,7 +42,7 @@ OpcodeDecode decode (
 arithmetic arith_op(
 	.A(A),
 	.B(B),
-	.sel_add(sel_and),
+	.sel_add(sel_add),
 	.result(arith_res),
 	.overflow(overflow_arith)
 );
