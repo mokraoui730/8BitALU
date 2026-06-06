@@ -1,5 +1,4 @@
 module SevenSegmentDisplay(
-    input  logic        reset_n,
     input logic [7:0] result,
     output logic [6:0]  Seg0,    //  ones  (rightmost)
     output logic [6:0]  Seg1,    //  tens
@@ -11,7 +10,7 @@ module SevenSegmentDisplay(
     logic [3:0] tens_parsed;
     logic [3:0] hundreds_parsed;
 
-    Parser #(.N(7)) resultParser (
+    Parser resultParser(
         .result(result), 
         .ones(ones_parsed), 
         .tens(tens_parsed),
