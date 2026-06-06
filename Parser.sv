@@ -6,7 +6,7 @@ module Parser (
 );
 
     assign ones =  result % 10;
-    assign tens = result / 10;
+    assign tens = (result / 10) % 10;
     assign hundreds = result / 100; 
 
 endmodule
