@@ -1,0 +1,35 @@
+# Clock
+set_location_assignment PIN_P11 -to clk
+
+# Seven segment displays
+set_location_assignment PIN_C14 -to SegOnes[0]
+set_location_assignment PIN_E15 -to SegOnes[1]
+set_location_assignment PIN_C15 -to SegOnes[2]
+set_location_assignment PIN_C16 -to SegOnes[3]
+set_location_assignment PIN_E16 -to SegOnes[4]
+set_location_assignment PIN_D17 -to SegOnes[5]
+set_location_assignment PIN_C17 -to SegOnes[6]
+
+set_location_assignment PIN_C18 -to SegTens[0]
+set_location_assignment PIN_D18 -to SegTens[1]
+set_location_assignment PIN_E18 -to SegTens[2]
+set_location_assignment PIN_B16 -to SegTens[3]
+set_location_assignment PIN_A17 -to SegTens[4]
+set_location_assignment PIN_A18 -to SegTens[5]
+set_location_assignment PIN_B17 -to SegTens[6]
+
+set_location_assignment PIN_B20 -to SegHundreds[0]
+set_location_assignment PIN_A20 -to SegHundreds[1]
+set_location_assignment PIN_B19 -to SegHundreds[2]
+set_location_assignment PIN_A21 -to SegHundreds[3]
+set_location_assignment PIN_B21 -to SegHundreds[4]
+set_location_assignment PIN_C22 -to SegHundreds[5]
+set_location_assignment PIN_B22 -to SegHundreds[6]
+
+set_location_assignment PIN_J20 -to PhaseLabel[0]
+set_location_assignment PIN_K20 -to PhaseLabel[1]
+set_location_assignment PIN_L18 -to PhaseLabel[2]
+set_location_assignment PIN_N18 -to PhaseLabel[3]
+set_location_assignment PIN_M20 -to PhaseLabel[4]
+set_location_assignment PIN_N19 -to PhaseLabel[5]
+set_location_assignment PIN_N20 -to PhaseLabel[6]
