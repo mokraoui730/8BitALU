@@ -9,8 +9,8 @@
  */
 
 module Parser (
-    input  logic [7:0] result,
-    output logic [3:0]   ones,
+    input  logic [7:0] result, // 8 bit binary number to be sliced into single decimal digits
+    output logic [3:0]   ones, 
     output logic [3:0]   tens,
     output logic [3:0] hundreds
 );
