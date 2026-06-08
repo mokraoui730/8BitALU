@@ -3,9 +3,9 @@
  * Arithmetic
  *
  * Author(s): Iman Mokraoui, Mylan Bui, Ava Katz
- * Description: Arithmetic contained the addition and subtraction functions. Takes in 3-bit sel_add opcode, if the opcode is not sel_add then 
- *Takes in 3-bit sel_add opcode, if the opcode is not sel_add then computes subtraction instead. The two 8-bit inputs used to perform arithmetic function
- *are A and B. The output is 9 bits wide, the 9th bit represents overflow and the first 8 bits are results. 
+ * Description: Arithmetic contais the addition and subtraction functions. Takes in 3-bit sel_add opcode, if the opcode is not sel_add then 
+ *computes subtraction instead. The two 8-bit inputs used to perform arithmetic function are A and B.
+ *The output is 9 bits wide, the 9th bit represents overflow and the first 8 bits are results. 
  *
  */
 module arithmetic( 
