@@ -22,7 +22,7 @@ module connector (
 	output logic [6:0] SegOnes, // Result display as hexadecimal (third digit) 
 	output logic [6:0] SegTens,  // Result display as hexadecimal (second digit) 
 	output logic [6:0] SegHundreds,  // Result display as hexadecimal (first digit) 
-	output logic [6:0] PhaseLabel //Output for each Phase (states) 
+	output logic [6:0] PhaseLabel, //Output for each Phase (states) 
 	output logic [9:0] LEDR // LED[9] = overflow, LED[2:1] = Phase
 );
 
