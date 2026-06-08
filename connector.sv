@@ -1,3 +1,14 @@
+/*
+ * ECE 204 Eight Bit ALU Final Project
+ * Connector
+ *
+ * Author(s): Iman Mokraoui, Mylan Bui, Ava Katz
+ * Description: Connector is the top-level file for the 8-Bit ALU. The connector function is a Finite State Machine and imports files Eight_bit_ALU and SevenSegmentDisplay.
+ * The four states are: Opcode(00), A(01), B(10) and Done (11)
+ * The connector allows for the 8-Bit ALU to work with the FPGA.
+ * Additional feature to display the ifferent "phases" (states) are also in this file for the user to know what state they are in. 
+ *
+ */
 // Top-level wrapper connecting 8Bit ALU to the FPGA. Using a 3 phase input schedule so the user can input opcode, A and B using the switches. 
 // Phase 0: Opcode
 // Phase 1: A input
