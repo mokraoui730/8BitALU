@@ -132,7 +132,7 @@ force opcode 100
 run 10
 
 # ADD tests
-# Result:  0 
+# Result: 00000000
 force A 00000000
 force B 00000000
 force opcode 101
@@ -181,7 +181,7 @@ force opcode 110
 run 10 
 
 # SUB tests
-# Result: 11111111 (0-255=-255)
+# Result: Overflow 00000001 (0-255=-255)
 force A 00000000
 force B 11111111
 force opcode 110
@@ -206,43 +206,50 @@ run 10
 force enable_n 1
 run 10
 
-# AND 10101010
+# Enable_n test with AND 
+# Result: 00000000
 force A 10101010
 force B 10101010
 force opcode 000
 run 10
 
-# OR 11111111
+# Enable_n test with OR
+# Result: 00000000
 force A 11111111
 force B 11111111
 force opcode 001
 run 10
 
-# XOR 11111111
+# Enable_n test with XOR
+# Result: 00000000
 force A 10101010
 force B 01010101
 force opcode 010
 run 10
 
-# apass 10101010
+# Enable_n test with APASS
+# Result: 00000000
 force A 10101010
 force B 00111100
 force opcode 011
 run 10
 
-# bpass 11111111
+# Enable_n test with BPASS 
+# Result: 00000000
 force A 00000000
 force B 11111111
 force opcode 100
 run 10
 
-# addition 
+# Enable_n test with ADD
+# Result: 00000000
 force A 11111111
 force B 00000001
 force opcode 101
 run 10
 
-#Subtraction 
+# Enable_n test with SUB
+# Result: 00000000
 #00000000 (85-85=0)
 force A 01010101
 force B 01010101
