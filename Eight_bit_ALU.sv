@@ -1,3 +1,12 @@
+/*
+ * ECE 204 Eight Bit ALU Final Project
+ * Eight_bit_ALU
+ *
+ * Author(s): Iman Mokraoui, Mylan Bui, Ava Katz
+ * Description: This file handles the ALU operations 
+ *
+ */
+
 module Eight_bit_ALU(
 	input logic [7:0] A,  // 8 bit input A
 	input logic [7:0] B,  //8 bit input B
@@ -17,7 +26,7 @@ module Eight_bit_ALU(
 	logic sel_add; 
 	logic sel_sub; 
 	
-	// stores results from each operation
+	// stores results from each operation 
 	logic [7:0] arith_res;
 	logic [7:0] and_res;
 	logic [7:0] or_res;
@@ -71,12 +80,13 @@ xor_op xor_operation(
 
 // produces the result of a operation specified by the opcode  
 always_comb begin
-	// flags always set to zero before operation
+	// flag set to zero before operation
 	// only set to high with addition or subtraction ops
 	overflow = 1'b0; 
 	result = 8'b0; 
 	// only perform ops when enabled 
 	if (!enable_n) begin
+		// if statements use the 1'b number returned from opcode decode to retrieve the operation result from the entered opcode
 		if (sel_and) 
 			result = and_res; 
 		else if (sel_or) 
@@ -94,9 +104,10 @@ always_comb begin
 			result = arith_res;
 			overflow = overflow_arith; 
 		end else
-			result = 8'b0;
+			result = 8'b0; // default value when invalid opcode is given is 0 
 	end
-	
+
+	// resets the result and overflow flag to 0 when reset is low
 	if (!reset_n) begin
 		result = 8'b0; 
 		overflow = 1'b0; 
