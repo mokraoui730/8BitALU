@@ -101,7 +101,6 @@ assign btn_pulse = btn_prev & ~KEY[1];
     );
 // SevenSegmentDisplay for Result
     SevenSegmentDisplay seg_display (
-        .reset_n (KEY[0]),
         .result  (alu_result),
         .Seg0    (SegOnes),
         .Seg1    (SegTens),
