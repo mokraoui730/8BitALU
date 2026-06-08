@@ -1,3 +1,12 @@
+/*
+ * ECE 204 Eight Bit ALU Final Project
+ * FILENAME
+ *
+ * Author(s): 
+ * Description:
+ *
+ */
+
 // 8BitALU
 module OpcodeDecode(
   input logic [2:0] opcode, 
