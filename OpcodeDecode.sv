@@ -1,13 +1,14 @@
 /*
  * ECE 204 Eight Bit ALU Final Project
- * FILENAME
+ * OpcodeDecode
  *
- * Author(s): 
- * Description:
+ * Author(s): Iman Mokraoui, Mylan Bui, Ava Katz
+ * Description: The decoder matches a 3-bit opcode value to a 1 bit operation variable.
+ * The operation variable is set to 1 each time the corresponding opcode is entered, and every
+ * other operation variable is set to 0. 
  *
  */
 
-// 8BitALU
 module OpcodeDecode(
   input logic [2:0] opcode, 
   input logic enable_n, // active low (enabled when switch is 0)
