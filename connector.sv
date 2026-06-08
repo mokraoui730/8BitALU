@@ -8,13 +8,14 @@ module connector (
 	input logic clk, //clock 
 	input logic [1:0] KEY, //buttons for KEY[0]: reset_n and KEY[1]: enable_n
 	input logic [9:0] SW, //SW[7:0]: A and B, SW[2:0]:Opcode
-	output logic [6:0] SegOnes, 
-	output logic [6:0] SegTens, 
-	output logic [6:0] SegHundreds, 
-	output logic [6:0] PhaseLabel
+	output logic [6:0] SegOnes, // Result display as hexadecimal (third digit) 
+	output logic [6:0] SegTens,  // Result display as hexadecimal (second digit) 
+	output logic [6:0] SegHundreds,  // Result display as hexadecimal (first digit) 
+	output logic [6:0] PhaseLabel //Output for each Phase (states) 
+	output logic [9:0] LEDR // LED[9] = overflow, LED[2:1] = Phase
 );
 
-// Phase definitions
+// Phase definitions, definition for each state as a type 
 typedef enum logic [1:0] { 
 	PH_OPCODE = 2'b00, 
 	PH_A = 2'b01,
@@ -37,6 +38,7 @@ wire btn_pulse;
 assign btn_pulse = btn_prev & ~KEY[1];
 
 // Phase + Input Latch 
+//Begins at PH_OPCODE and resets to PH_OPCODE
  always_ff @(posedge clk or negedge KEY[0]) begin
         if (!KEY[0]) begin
             phase      <= PH_OPCODE;
@@ -47,17 +49,17 @@ assign btn_pulse = btn_prev & ~KEY[1];
         end else begin
             btn_prev <= KEY[1];
 
-            if (btn_pulse) begin
+			if (btn_pulse) begin //Next State Logic 
                 case (phase)
-                    PH_OPCODE: begin
+                    PH_OPCODE: begin  //phase opcode to phase A 
                         opcode_reg <= SW[2:0];
                         phase      <= PH_A;
                     end
-                    PH_A: begin
+                    PH_A: begin   // phase A to phase B
                         A_reg <= SW[7:0];
                         phase <= PH_B;
                     end
-                    PH_B: begin
+                    PH_B: begin   //phase B to phase opcode
                         B_reg <= SW[7:0];
                         phase <= PH_DONE;
                     end
@@ -95,7 +97,7 @@ assign btn_pulse = btn_prev & ~KEY[1];
         .Seg2    (SegHundreds)
     );
 	 
-// Phase Labels 
+// EXTRA FEATURES: Phase Labels 
 // Active-low 7-segment encoding. 
 //  For opcode "O"  -> 7'b100_0000   (segments a,b,c,d,e,f on; g off)
 //  For input A, "A"  -> 7'b000_1000   (segments a,b,c,e,f,g on)
@@ -110,5 +112,8 @@ assign btn_pulse = btn_prev & ~KEY[1];
             default:   PhaseLabel = 7'b111_1111;
         endcase
     end
-
+   assign LEDR[9]   = alu_overflow;   // overflow on top LED
+   assign LEDR[2:1] = phase;          // 2-bit phase shown on LEDR[2:1]
+   assign LEDR[8:3] = 6'b000_000;    // unused LEDs off
+   assign LEDR[0]   = 1'b0;          // unused
 endmodule
